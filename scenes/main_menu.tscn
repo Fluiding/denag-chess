@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://ck3nuqlfjj5sx"]
+[gd_scene load_steps=25 format=3 uid="uid://ck3nuqlfjj5sx"]
 
 [ext_resource type="Script" uid="uid://caxkgub1hd5i7" path="res://scripts/ui.gd" id="1_bqqt6"]
 [ext_resource type="FontFile" uid="uid://v2myfakbs1qm" path="res://assets/Fredoka.ttf" id="2_wu84c"]
-[ext_resource type="Script" uid="uid://cb6cpj8jwk1h" path="res://scripts/main_menu.gd" id="3_8ln24"]
 
 [sub_resource type="FontVariation" id="FontVariation_fu7sn"]
 base_font = ExtResource("2_wu84c")
@@ -154,8 +153,6 @@ corner_radius_bottom_left = 30
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jix8l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gs482"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -591,69 +588,6 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "CANCEL"
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Background"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -557.0
-offset_top = -168.5
-offset_right = 557.0
-offset_bottom = 168.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_gs482")
-script = ExtResource("3_8ln24")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Background/PanelContainer"]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-theme_override_constants/separation = 40
-
-[node name="Title" type="Label" parent="MarginContainer/Background/PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "chess!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Background/PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="SingleplayerButton" type="Button" parent="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Singleplayer"
-
-[node name="HostButton" type="Button" parent="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Host"
-
-[node name="JoinButton" type="Button" parent="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Join Server"
-
-[node name="AddressBox" type="LineEdit" parent="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-placeholder_text = "Enter Address..."
-alignment = 1
-
-[node name="LoadingLabel" type="Label" parent="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-horizontal_alignment = 1
-
 [connection signal="pressed" from="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents/MultiplayerButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
 [connection signal="pressed" from="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents/SingleplayerButton" to="." method="singleplayer"]
 [connection signal="pressed" from="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents/ExitButton" to="." method="on_exit_pressed"]
@@ -668,6 +602,3 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents/BackButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
 [connection signal="pressed" from="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="cancel_connection"]
 [connection signal="pressed" from="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
-[connection signal="button_up" from="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer/SingleplayerButton" to="MarginContainer/Background/PanelContainer" method="singleplayer"]
-[connection signal="button_up" from="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer/HostButton" to="MarginContainer/Background/PanelContainer" method="host"]
-[connection signal="button_up" from="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer/JoinButton" to="MarginContainer/Background/PanelContainer" method="join"]
