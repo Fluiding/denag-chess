@@ -15,7 +15,6 @@ func switch_menu(menu: NodePath):
 	current_menu.visible = false
 	menu_node.visible = true
 	current_menu = menu_node
-	#test
 
 func singleplayer():
 	global.is_multiplayer = false

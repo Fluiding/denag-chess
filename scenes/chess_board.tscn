@@ -1,24 +1,24 @@
 [gd_scene load_steps=26 format=3 uid="uid://p8wxtnk1k3r3"]
 
-[ext_resource type="Script" uid="uid://ji04tn1ylv8d" path="res://scripts/chess_board.gd" id="1_jrvug"]
-[ext_resource type="Texture2D" uid="uid://blxpsst2gmovq" path="res://pfp_placeholder.png" id="1_xawwc"]
-[ext_resource type="FontFile" uid="uid://v2myfakbs1qm" path="res://Fredoka.ttf" id="2_3awgh"]
-[ext_resource type="Texture2D" uid="uid://cp4wbrehqpxqi" path="res://pieces/br.png" id="2_5wkbk"]
-[ext_resource type="Texture2D" uid="uid://c7ch3a08udehc" path="res://pieces/bn.png" id="3_xawwc"]
-[ext_resource type="Texture2D" uid="uid://dljvfepgnrdl1" path="res://pieces/bb.png" id="4_3awgh"]
-[ext_resource type="StyleBox" uid="uid://daj20n15kjgpp" path="res://white_square_style.tres" id="4_angvh"]
-[ext_resource type="StyleBox" uid="uid://bugamuekweuft" path="res://black_square_style.tres" id="4_rcs3x"]
-[ext_resource type="Texture2D" uid="uid://bioaepq86o6wo" path="res://pieces/bq.png" id="5_rcs3x"]
-[ext_resource type="Texture2D" uid="uid://deaf0h45e2chb" path="res://pieces/bk.png" id="6_angvh"]
-[ext_resource type="Texture2D" uid="uid://gqx3uoj5mf1e" path="res://pieces/bp.png" id="7_iwfb5"]
-[ext_resource type="Texture2D" uid="uid://n4xtn63r4hxb" path="res://pieces/wr.png" id="8_7gn3k"]
-[ext_resource type="Texture2D" uid="uid://ddjcglexe5bxs" path="res://pieces/wn.png" id="9_i3l0n"]
-[ext_resource type="Texture2D" uid="uid://cw2ao6smpcymt" path="res://pieces/wb.png" id="10_kb7q6"]
-[ext_resource type="Texture2D" uid="uid://bt65hwmrvd4s6" path="res://pieces/wq.png" id="11_ejcqj"]
-[ext_resource type="Texture2D" uid="uid://cb3gs3ljuf0kb" path="res://pieces/wk.png" id="12_j4fr6"]
-[ext_resource type="Texture2D" uid="uid://ds23btojd5nct" path="res://pieces/wp.png" id="13_e3gpa"]
-[ext_resource type="AudioStream" uid="uid://openhih66m5e" path="res://sounds/move.mp3" id="14_x46vq"]
-[ext_resource type="AudioStream" uid="uid://dqg3e8uiduhh1" path="res://sounds/capture.mp3" id="15_1au56"]
+[ext_resource type="Texture2D" uid="uid://blxpsst2gmovq" path="res://assets/pfp_placeholder.png" id="1_161ya"]
+[ext_resource type="FontFile" uid="uid://v2myfakbs1qm" path="res://assets/Fredoka.ttf" id="2_a1b85"]
+[ext_resource type="Script" uid="uid://ji04tn1ylv8d" path="res://scripts/chess_board.gd" id="3_n2xhk"]
+[ext_resource type="StyleBox" uid="uid://daj20n15kjgpp" path="res://assets/white_square_style.tres" id="4_5ob2p"]
+[ext_resource type="StyleBox" uid="uid://bugamuekweuft" path="res://assets/black_square_style.tres" id="5_jcfce"]
+[ext_resource type="Texture2D" uid="uid://cp4wbrehqpxqi" path="res://assets/pieces/br.png" id="6_ssxln"]
+[ext_resource type="Texture2D" uid="uid://c7ch3a08udehc" path="res://assets/pieces/bn.png" id="7_h1iof"]
+[ext_resource type="Texture2D" uid="uid://dljvfepgnrdl1" path="res://assets/pieces/bb.png" id="8_04w18"]
+[ext_resource type="Texture2D" uid="uid://bioaepq86o6wo" path="res://assets/pieces/bq.png" id="9_ve3gr"]
+[ext_resource type="Texture2D" uid="uid://deaf0h45e2chb" path="res://assets/pieces/bk.png" id="10_6jn3o"]
+[ext_resource type="Texture2D" uid="uid://gqx3uoj5mf1e" path="res://assets/pieces/bp.png" id="11_qqyo2"]
+[ext_resource type="Texture2D" uid="uid://n4xtn63r4hxb" path="res://assets/pieces/wr.png" id="12_ldayc"]
+[ext_resource type="Texture2D" uid="uid://ddjcglexe5bxs" path="res://assets/pieces/wn.png" id="13_grhso"]
+[ext_resource type="Texture2D" uid="uid://cw2ao6smpcymt" path="res://assets/pieces/wb.png" id="14_tfylg"]
+[ext_resource type="Texture2D" uid="uid://bt65hwmrvd4s6" path="res://assets/pieces/wq.png" id="15_3iy8w"]
+[ext_resource type="Texture2D" uid="uid://cb3gs3ljuf0kb" path="res://assets/pieces/wk.png" id="16_ta22p"]
+[ext_resource type="Texture2D" uid="uid://ds23btojd5nct" path="res://assets/pieces/wp.png" id="17_2pwln"]
+[ext_resource type="AudioStream" uid="uid://openhih66m5e" path="res://assets/sounds/move.mp3" id="18_2i8n2"]
+[ext_resource type="AudioStream" uid="uid://dqg3e8uiduhh1" path="res://assets/sounds/capture.mp3" id="19_mxex8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wkbk"]
 bg_color = Color(0.19607843, 0.2, 0.2784314, 1)
@@ -34,7 +34,7 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [sub_resource type="FontVariation" id="FontVariation_rcs3x"]
-base_font = ExtResource("2_3awgh")
+base_font = ExtResource("2_a1b85")
 variation_opentype = {
 2003072104: 100,
 2003265652: 600
@@ -116,7 +116,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rcs3x")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/OpponentInfo/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
-texture = ExtResource("1_xawwc")
+texture = ExtResource("1_161ya")
 expand_mode = 2
 
 [node name="Player2Label" type="Label" parent="MarginContainer/BG/VBoxContainer/OpponentInfo/MarginContainer/HBoxContainer"]
@@ -128,7 +128,7 @@ label_settings = SubResource("LabelSettings_iwfb5")
 [node name="ChessBoard" type="PanelContainer" parent="MarginContainer/BG/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jrvug")
-script = ExtResource("1_jrvug")
+script = ExtResource("3_n2xhk")
 
 [node name="Squares" type="HBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
 layout_mode = 2
@@ -145,56 +145,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 6
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="b" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -207,56 +207,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="c" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -269,56 +269,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 6
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="d" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -331,56 +331,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="e" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -393,56 +393,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 6
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="f" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -455,56 +455,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="g" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -517,56 +517,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 6
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="h" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -579,56 +579,56 @@ custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_rcs3x")
+theme_override_styles/panel = ExtResource("5_jcfce")
 
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 custom_minimum_size = Vector2(117, 117)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("4_angvh")
+theme_override_styles/panel = ExtResource("4_5ob2p")
 
 [node name="Pieces" type="Node" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
 
@@ -642,7 +642,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("2_5wkbk")
+texture = ExtResource("6_ssxln")
 expand_mode = 1
 
 [node name="BlackKnight1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -655,7 +655,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("3_xawwc")
+texture = ExtResource("7_h1iof")
 expand_mode = 1
 
 [node name="BlackBishop1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -668,7 +668,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("4_3awgh")
+texture = ExtResource("8_04w18")
 expand_mode = 1
 
 [node name="BlackQueen" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -681,7 +681,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("5_rcs3x")
+texture = ExtResource("9_ve3gr")
 expand_mode = 1
 
 [node name="BlackKing" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -694,7 +694,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("6_angvh")
+texture = ExtResource("10_6jn3o")
 expand_mode = 1
 
 [node name="BlackBishop2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -707,7 +707,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("4_3awgh")
+texture = ExtResource("8_04w18")
 expand_mode = 1
 
 [node name="BlackKnight2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -720,7 +720,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("3_xawwc")
+texture = ExtResource("7_h1iof")
 expand_mode = 1
 
 [node name="BlackRook2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -733,7 +733,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("2_5wkbk")
+texture = ExtResource("6_ssxln")
 expand_mode = 1
 
 [node name="BlackPawn1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -746,7 +746,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="BlackPawn2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -759,7 +759,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="BlackPawn3" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -772,7 +772,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="BlackPawn4" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -785,7 +785,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="BlackPawn5" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -798,7 +798,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="BlackPawn6" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -811,7 +811,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="BlackPawn7" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -824,7 +824,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="BlackPawn8" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -837,7 +837,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("7_iwfb5")
+texture = ExtResource("11_qqyo2")
 expand_mode = 1
 
 [node name="WhiteRook1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -850,7 +850,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("8_7gn3k")
+texture = ExtResource("12_ldayc")
 expand_mode = 1
 
 [node name="WhiteKnight1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -863,7 +863,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("9_i3l0n")
+texture = ExtResource("13_grhso")
 expand_mode = 1
 
 [node name="WhiteBishop1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -876,7 +876,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("10_kb7q6")
+texture = ExtResource("14_tfylg")
 expand_mode = 1
 
 [node name="WhiteQueen" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -889,7 +889,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("11_ejcqj")
+texture = ExtResource("15_3iy8w")
 expand_mode = 1
 
 [node name="WhiteKing" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -902,7 +902,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("12_j4fr6")
+texture = ExtResource("16_ta22p")
 expand_mode = 1
 
 [node name="WhiteBishop2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -915,7 +915,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("10_kb7q6")
+texture = ExtResource("14_tfylg")
 expand_mode = 1
 
 [node name="WhiteKnight2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -928,7 +928,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("9_i3l0n")
+texture = ExtResource("13_grhso")
 expand_mode = 1
 
 [node name="WhiteRook2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -941,7 +941,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("8_7gn3k")
+texture = ExtResource("12_ldayc")
 expand_mode = 1
 
 [node name="WhitePawn1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -954,7 +954,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="WhitePawn2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -967,7 +967,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="WhitePawn3" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -980,7 +980,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="WhitePawn4" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -993,7 +993,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="WhitePawn5" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -1006,7 +1006,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="WhitePawn6" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -1019,7 +1019,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="WhitePawn7" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -1032,7 +1032,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="WhitePawn8" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
@@ -1045,17 +1045,17 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("13_e3gpa")
+texture = ExtResource("17_2pwln")
 expand_mode = 1
 
 [node name="MoveSound" type="AudioStreamPlayer" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
 unique_name_in_owner = true
-stream = ExtResource("14_x46vq")
+stream = ExtResource("18_2i8n2")
 max_polyphony = 2
 
 [node name="CaptureSound" type="AudioStreamPlayer" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
 unique_name_in_owner = true
-stream = ExtResource("15_1au56")
+stream = ExtResource("19_mxex8")
 max_polyphony = 2
 
 [node name="PlayerInfo" type="PanelContainer" parent="MarginContainer/BG/VBoxContainer"]
@@ -1081,7 +1081,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rcs3x")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/PlayerInfo/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
-texture = ExtResource("1_xawwc")
+texture = ExtResource("1_161ya")
 expand_mode = 2
 
 [node name="Player1Label" type="Label" parent="MarginContainer/BG/VBoxContainer/PlayerInfo/MarginContainer/HBoxContainer"]
