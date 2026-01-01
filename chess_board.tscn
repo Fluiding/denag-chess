@@ -1,0 +1,1284 @@
+[gd_scene load_steps=26 format=3 uid="uid://p8wxtnk1k3r3"]
+
+[ext_resource type="Script" uid="uid://ji04tn1ylv8d" path="res://scripts/chess_board.gd" id="1_jrvug"]
+[ext_resource type="Texture2D" uid="uid://blxpsst2gmovq" path="res://pfp_placeholder.png" id="1_xawwc"]
+[ext_resource type="FontFile" uid="uid://v2myfakbs1qm" path="res://Fredoka.ttf" id="2_3awgh"]
+[ext_resource type="Texture2D" uid="uid://cp4wbrehqpxqi" path="res://pieces/br.png" id="2_5wkbk"]
+[ext_resource type="Texture2D" uid="uid://c7ch3a08udehc" path="res://pieces/bn.png" id="3_xawwc"]
+[ext_resource type="Texture2D" uid="uid://dljvfepgnrdl1" path="res://pieces/bb.png" id="4_3awgh"]
+[ext_resource type="StyleBox" uid="uid://daj20n15kjgpp" path="res://white_square_style.tres" id="4_angvh"]
+[ext_resource type="StyleBox" uid="uid://bugamuekweuft" path="res://black_square_style.tres" id="4_rcs3x"]
+[ext_resource type="Texture2D" uid="uid://bioaepq86o6wo" path="res://pieces/bq.png" id="5_rcs3x"]
+[ext_resource type="Texture2D" uid="uid://deaf0h45e2chb" path="res://pieces/bk.png" id="6_angvh"]
+[ext_resource type="Texture2D" uid="uid://gqx3uoj5mf1e" path="res://pieces/bp.png" id="7_iwfb5"]
+[ext_resource type="Texture2D" uid="uid://n4xtn63r4hxb" path="res://pieces/wr.png" id="8_7gn3k"]
+[ext_resource type="Texture2D" uid="uid://ddjcglexe5bxs" path="res://pieces/wn.png" id="9_i3l0n"]
+[ext_resource type="Texture2D" uid="uid://cw2ao6smpcymt" path="res://pieces/wb.png" id="10_kb7q6"]
+[ext_resource type="Texture2D" uid="uid://bt65hwmrvd4s6" path="res://pieces/wq.png" id="11_ejcqj"]
+[ext_resource type="Texture2D" uid="uid://cb3gs3ljuf0kb" path="res://pieces/wk.png" id="12_j4fr6"]
+[ext_resource type="Texture2D" uid="uid://ds23btojd5nct" path="res://pieces/wp.png" id="13_e3gpa"]
+[ext_resource type="AudioStream" uid="uid://openhih66m5e" path="res://sounds/move.mp3" id="14_x46vq"]
+[ext_resource type="AudioStream" uid="uid://dqg3e8uiduhh1" path="res://sounds/capture.mp3" id="15_1au56"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wkbk"]
+bg_color = Color(0.19607843, 0.2, 0.2784314, 1)
+border_color = Color(0.19607843, 0.2, 0.2784314, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcs3x"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="FontVariation" id="FontVariation_rcs3x"]
+base_font = ExtResource("2_3awgh")
+variation_opentype = {
+2003072104: 100,
+2003265652: 600
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_iwfb5"]
+font = SubResource("FontVariation_rcs3x")
+font_size = 42
+font_color = Color(0.9764706, 0.89411765, 0.7411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrvug"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 30
+border_width_right = 30
+border_color = Color(0.19607843, 0.2, 0.2784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xawwc"]
+bg_color = Color(0.19607843, 0.2, 0.2784314, 1)
+border_color = Color(0.19607843, 0.2, 0.2784314, 1)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="ChessBoard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.37254903, 0.49411765, 0.42352942, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BG"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -467.0
+offset_top = -467.0
+offset_right = 467.0
+offset_bottom = 467.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="OpponentInfo" type="PanelContainer" parent="MarginContainer/BG/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5wkbk")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BG/VBoxContainer/OpponentInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BG/VBoxContainer/OpponentInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/BG/VBoxContainer/OpponentInfo/MarginContainer/HBoxContainer"]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rcs3x")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/OpponentInfo/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_xawwc")
+expand_mode = 2
+
+[node name="Player2Label" type="Label" parent="MarginContainer/BG/VBoxContainer/OpponentInfo/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Magnus Carlsen (3280)"
+label_settings = SubResource("LabelSettings_iwfb5")
+
+[node name="ChessBoard" type="PanelContainer" parent="MarginContainer/BG/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jrvug")
+script = ExtResource("1_jrvug")
+
+[node name="Squares" type="HBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="a" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 6
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="b" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="c" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 6
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="d" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="e" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 6
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="f" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="g" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 6
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="h" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="8" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_rcs3x")
+
+[node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
+custom_minimum_size = Vector2(117, 117)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_angvh")
+
+[node name="Pieces" type="Node" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
+
+[node name="BlackRook1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_5wkbk")
+expand_mode = 1
+
+[node name="BlackKnight1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("3_xawwc")
+expand_mode = 1
+
+[node name="BlackBishop1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_3awgh")
+expand_mode = 1
+
+[node name="BlackQueen" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("5_rcs3x")
+expand_mode = 1
+
+[node name="BlackKing" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("6_angvh")
+expand_mode = 1
+
+[node name="BlackBishop2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("4_3awgh")
+expand_mode = 1
+
+[node name="BlackKnight2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("3_xawwc")
+expand_mode = 1
+
+[node name="BlackRook2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_5wkbk")
+expand_mode = 1
+
+[node name="BlackPawn1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="BlackPawn2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="BlackPawn3" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="BlackPawn4" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="BlackPawn5" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="BlackPawn6" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="BlackPawn7" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="BlackPawn8" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("7_iwfb5")
+expand_mode = 1
+
+[node name="WhiteRook1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_7gn3k")
+expand_mode = 1
+
+[node name="WhiteKnight1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_i3l0n")
+expand_mode = 1
+
+[node name="WhiteBishop1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_kb7q6")
+expand_mode = 1
+
+[node name="WhiteQueen" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("11_ejcqj")
+expand_mode = 1
+
+[node name="WhiteKing" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("12_j4fr6")
+expand_mode = 1
+
+[node name="WhiteBishop2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_kb7q6")
+expand_mode = 1
+
+[node name="WhiteKnight2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_i3l0n")
+expand_mode = 1
+
+[node name="WhiteRook2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_7gn3k")
+expand_mode = 1
+
+[node name="WhitePawn1" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="WhitePawn2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="WhitePawn3" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="WhitePawn4" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="WhitePawn5" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="WhitePawn6" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="WhitePawn7" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="WhitePawn8" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Pieces"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13_e3gpa")
+expand_mode = 1
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
+unique_name_in_owner = true
+stream = ExtResource("14_x46vq")
+max_polyphony = 2
+
+[node name="CaptureSound" type="AudioStreamPlayer" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
+unique_name_in_owner = true
+stream = ExtResource("15_1au56")
+max_polyphony = 2
+
+[node name="PlayerInfo" type="PanelContainer" parent="MarginContainer/BG/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xawwc")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BG/VBoxContainer/PlayerInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BG/VBoxContainer/PlayerInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/BG/VBoxContainer/PlayerInfo/MarginContainer/HBoxContainer"]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rcs3x")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/PlayerInfo/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_xawwc")
+expand_mode = 2
+
+[node name="Player1Label" type="Label" parent="MarginContainer/BG/VBoxContainer/PlayerInfo/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Fluiding (4610)"
+label_settings = SubResource("LabelSettings_iwfb5")
+
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":4,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":4,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":4,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":4,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/8" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/7" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/6" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/5" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/4" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/3" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/2" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
+[connection signal="mouse_entered" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_entered" flags=18 binds= [Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(113, 113),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","tooltip_auto_translate_mode":0,"focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"focus_behavior_recursive":0,"mouse_filter":0,"mouse_behavior_recursive":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"accessibility_name":"","accessibility_description":"","accessibility_live":0,"accessibility_controls_nodes":Array[NodePath]([]),"accessibility_described_by_nodes":Array[NodePath]([]),"accessibility_labeled_by_nodes":Array[NodePath]([]),"accessibility_flow_to_nodes":Array[NodePath]([]),"theme":null,"theme_type_variation":&"","script":null)
+]]
+[connection signal="mouse_exited" from="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/1" to="MarginContainer/BG/VBoxContainer/ChessBoard" method="on_square_mouse_exited"]
