@@ -186,12 +186,11 @@ custom_minimum_size = Vector2(950, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.32890624
-anchor_top = 0.05185185
+anchor_top = 0.1
 anchor_right = 0.67109376
-anchor_bottom = 0.94814813
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="MarginContainer/Background/MainMenu"]
 layout_mode = 2
@@ -230,7 +229,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_7vrkn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fu7sn")
-text = "PLAY"
+text = "MULTIPLAYER"
 
 [node name="SingleplayerButton" type="Button" parent="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents"]
 custom_minimum_size = Vector2(500, 145)
@@ -299,9 +298,9 @@ custom_minimum_size = Vector2(950, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.32890624
-anchor_top = 0.05185185
+anchor_top = 0.1
 anchor_right = 0.67109376
-anchor_bottom = 0.94814813
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
@@ -391,9 +390,9 @@ custom_minimum_size = Vector2(950, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.32890624
-anchor_top = 0.05185185
+anchor_top = 0.1
 anchor_right = 0.67109376
-anchor_bottom = 0.94814813
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
@@ -452,9 +451,9 @@ custom_minimum_size = Vector2(950, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.32890624
-anchor_top = 0.05185185
+anchor_top = 0.1
 anchor_right = 0.67109376
-anchor_bottom = 0.94814813
+anchor_bottom = 0.9
 offset_left = -265.21875
 offset_right = 265.21875
 grow_horizontal = 2
@@ -538,9 +537,9 @@ custom_minimum_size = Vector2(950, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.32890624
-anchor_top = 0.05185185
+anchor_top = 0.1
 anchor_right = 0.67109376
-anchor_bottom = 0.94814813
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
@@ -662,12 +661,12 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/HostButton" to="." method="switch_menu" binds= [NodePath("../../../../HostingMenu")]]
 [connection signal="pressed" from="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/JoinButton" to="." method="switch_menu" binds= [NodePath("../../../../JoinMenu")]]
 [connection signal="pressed" from="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/BackButton" to="." method="switch_menu" binds= [NodePath("../../../../MainMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/HostingMenu/MarginContainer/HostingMenuContents/CancelButton" to="." method="cancel_host"]
+[connection signal="pressed" from="MarginContainer/Background/HostingMenu/MarginContainer/HostingMenuContents/CancelButton" to="." method="cancel_connection"]
 [connection signal="pressed" from="MarginContainer/Background/HostingMenu/MarginContainer/HostingMenuContents/CancelButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
 [connection signal="pressed" from="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents/JoinButton" to="." method="join"]
 [connection signal="pressed" from="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents/JoinButton" to="." method="switch_menu" binds= [NodePath("../../../../JoiningMenu")]]
 [connection signal="pressed" from="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents/BackButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="cancel_join"]
+[connection signal="pressed" from="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="cancel_connection"]
 [connection signal="pressed" from="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
 [connection signal="button_up" from="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer/SingleplayerButton" to="MarginContainer/Background/PanelContainer" method="singleplayer"]
 [connection signal="button_up" from="MarginContainer/Background/PanelContainer/VBoxContainer/VBoxContainer/HostButton" to="MarginContainer/Background/PanelContainer" method="host"]
