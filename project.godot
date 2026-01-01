@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.5", "Mobile")
 [autoload]
 
 global="*res://scripts/global.gd"
+networking="*res://scripts/networking.gd"
 
 [display]
 

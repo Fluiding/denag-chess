@@ -24,7 +24,7 @@ func singleplayer():
 	get_tree().change_scene_to_file("res://scenes/chess_board.tscn")
 
 func on_player_connect(_id):
-	if multiplayer.is_server():
+	if is_inside_tree() and multiplayer.is_server():
 		%HostingMenuContents/StatusLabel.text = "Loading game..."
 		get_tree().change_scene_to_file("res://scenes/chess_board.tscn")
 
