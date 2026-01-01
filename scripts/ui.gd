@@ -19,11 +19,11 @@ func switch_menu(menu: NodePath):
 func singleplayer():
 	global.is_multiplayer = false
 	global.is_white = bool(randi() % 2)
-	get_tree().change_scene_to_file("res://chess_board.tscn")
+	get_tree().change_scene_to_file("res://scenes/chess_board.tscn")
 
 func on_player_connect(_id):
 	%HostingMenuContents/StatusLabel.text = "Loading game..."
-	get_tree().change_scene_to_file("res://chess_board.tscn")
+	get_tree().change_scene_to_file("res://scenes/chess_board.tscn")
 
 func on_player_disconnect(_id):
 	pass
@@ -62,7 +62,7 @@ func join(port: int = 14922):
 	global.is_multiplayer = true
 	global.is_white = false
 	%HostingMenuContents/StatusLabel.text = "Loading game..."
-	get_tree().change_scene_to_file("res://chess_board.tscn")
+	get_tree().change_scene_to_file("res://scenes/chess_board.tscn")
 
 func cancel_join() -> void:
 	%JoiningMenuContents/StatusLabel.text = ""
