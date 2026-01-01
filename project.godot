@@ -23,6 +23,7 @@ networking="*res://scripts/networking.gd"
 
 window/size/viewport_width=1080
 window/size/viewport_height=2340
+window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
