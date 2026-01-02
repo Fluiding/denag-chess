@@ -34,67 +34,82 @@ var mouse_on_square
 var holding_piece: Piece
 var pieces = {}
 var regex = RegEx.new()
-var is_white: bool
-var is_playing_side: bool = true
-var is_turn: bool = false
+var is_player_white: bool
+var is_turn = false
 
 class Piece:
 	var type: PieceType
 	var is_white: bool
+	var in_check: bool = false # Only for the king pieces
 	var position: String
 	var moves: int = 0
 	var node: Node
 
-	## Create a Piece object and set the nodes inside /Pieces/
-	## to the position according to the notation argument given.
+	## Instantiate a Piece object, duplicate a piece node, and make
+	## its parent the square node of the notation argument given.
 	func _init(this, _type: PieceType, _is_white, node_name, notation):
 		type = _type
 		is_white = _is_white
 		position = notation
-		node = this.get_node("Pieces/%s" % node_name).duplicate()
+		node = this.get_node("Assets/%s" % node_name).duplicate()
 		this.get_square(notation).add_child(node)
 		node.visible = true
 
-func _init() -> void:
+func _ready():
+	# To derive piece info from the name of a piece.
 	regex.compile("[A-Z][a-z]*")
-
-func _ready() -> void:
 	init_chess_board(global.is_white)
 
-func _process(_delta: float) -> void:
-	if holding_piece:
-		var mouse_pos = get_global_mouse_position()
-		var target_pos = mouse_pos - holding_piece.node.size / 2
-		holding_piece.node.global_position = target_pos
+func _process(_delta: float):
 
 	if Input.is_action_just_pressed("click") and mouse_on_square:
-		if is_turn or !global.is_multiplayer:
-			var piece = get_piece_on_square(mouse_on_square)
-			if piece and piece.is_white == is_white:
-				holding_piece = piece
-				piece.node.z_index = 1
+		var piece = get_piece_on_square(mouse_on_square)
+		if piece and piece.is_white == is_player_white:
+			holding_piece = piece
+			piece.node.z_index += 1
+
+	if holding_piece:
+		var mouse_pos = get_global_mouse_position()
+		var target_piece_pos = mouse_pos - holding_piece.node.size / 2
+		holding_piece.node.global_position = target_piece_pos
+		if holding_piece.in_check:
+			var check_ind = holding_piece.node.get_parent()
+			check_ind = check_ind.get_node("CheckIndicator")
+			var target_ind_pos = mouse_pos - check_ind.size / 2
+			check_ind.global_position = target_ind_pos
+
+
 
 	if Input.is_action_just_released("click") and mouse_on_square and holding_piece:
-		if mouse_on_square in get_valid_moves(holding_piece):
-			var id = multiplayer.get_unique_id()
-			move.rpc(holding_piece.node.name, mouse_on_square, id)
-		else:
-			var target_pos = get_global_pos(holding_piece.position)
-			holding_piece.node.global_position = target_pos
 
-		holding_piece.node.z_index = 0
+		if (is_turn or !global.is_multiplayer) \
+		and mouse_on_square in get_valid_moves(holding_piece):
+			var client_id = multiplayer.get_unique_id()
+			move.rpc(holding_piece.node.name, mouse_on_square, client_id)
+		else:
+			holding_piece.node.position = Vector2.ZERO
+			if holding_piece.in_check:
+				var check_ind = holding_piece.node.get_parent()
+				check_ind = check_ind.get_node("CheckIndicator")
+				check_ind.position = Vector2.ZERO
+				check_ind.set_anchors_and_offsets_preset(PRESET_CENTER)
+
+		holding_piece.node.z_index -= 1
 		holding_piece = null
 
-func init_chess_board(_is_white: bool):
-	is_white = _is_white
+
+func init_chess_board(is_white: bool):
+	%GameBeginSound.play()
+	is_player_white = is_white
 	is_turn = !global.is_multiplayer or is_white
-	var board = default_board.duplicate()
-	if is_white:
+
+	var board = default_board.duplicate(true)
+	if !is_white:
 		board.reverse()
 
 	for y_index in range(8):
 		for x_index in range(8):
-			var no = horizontal_squares[x_index] + str(y_index + 1)
+			var no = horizontal_squares[x_index] + str(8 - y_index)
 			var piece_name = board[y_index][x_index]
 			if not piece_name:
 				continue
@@ -103,11 +118,12 @@ func init_chess_board(_is_white: bool):
 			var white = data[0].get_string() == "White"
 			var type = data[1].get_string()
 
-			var piece_node = get_node("Pieces/%s" % piece_name)
+			var piece_node = get_node("Assets/%s" % piece_name)
 			var piece_obj = Piece.new(self, PieceType[type], white, piece_node.name, no)
 			pieces.set(piece_node.name, piece_obj)
 
-func raycast(piece: Piece, dir: Vector2i, steps = 32, include_capture = true):
+# Cast a ray from the piece to detect if squares are valid moves.
+func raycast(piece, dir: Vector2i, steps = 32, include_capture = true, captures_only = false):
 	var valid_moves = []
 	var step = 0
 	var pos = get_normalized_pos(piece.position) + dir
@@ -120,6 +136,8 @@ func raycast(piece: Piece, dir: Vector2i, steps = 32, include_capture = true):
 			if piece_on_sq.is_white != piece.is_white and include_capture:
 				valid_moves.append(no)
 			break
+		elif captures_only:
+			break
 
 		valid_moves.append(no)
 		pos += dir
@@ -127,7 +145,8 @@ func raycast(piece: Piece, dir: Vector2i, steps = 32, include_capture = true):
 
 	return valid_moves
 
-func get_valid_moves(piece: Piece):
+
+func get_valid_moves(piece):
 	var valid_moves = []
 
 	match piece.type:
@@ -152,31 +171,60 @@ func get_valid_moves(piece: Piece):
 				valid_moves.append_array(raycast(piece, dir, 1))
 
 		PieceType.Pawn:
+			# Vertical Movement
 			var dir
 			if global.is_multiplayer:
 				dir = Vector2i(0, 1)
 			else:
 				dir = Vector2i(0, 1 if is_turn else -1)
 			var steps = int(piece.moves == 0) + 1
+
+			# Diagonal Captures
+			var d1 = Vector2i(dir.y, dir.y)
+			var d2 = Vector2i(-dir.y, dir.y)
+
 			valid_moves.append_array(raycast(piece, dir, steps, false))
-
-			var origin = get_normalized_pos(piece.position)
-			var check1 = get_no_from_norm_pos(origin + Vector2i(dir.y, dir.y))
-			var check2 = get_no_from_norm_pos(origin + Vector2i(-dir.y, dir.y))
-
-			if check1 and get_piece_on_square(check1):
-				valid_moves.append(check1)
-			if check2 and get_piece_on_square(check2):
-				valid_moves.append(check2)
+			valid_moves.append_array(raycast(piece, d1, 1, true, true))
+			valid_moves.append_array(raycast(piece, d2, 1, true, true))
 
 	return valid_moves
 
-@rpc("any_peer", "call_local", "reliable")
-func move(piece_name: String, no: String, client_id: int):
-	is_turn = !is_turn
+func set_king_in_check(is_king_white, state):
+	var side = "White" if is_king_white else "Black"
+	var king = pieces[side + "King"]
+	var king_square = get_square(king.position)
 
+	king.in_check = state
+	if !state and king_square.has_node("CheckIndicator"):
+		king_square.get_node("CheckIndicator").queue_free()
+		return
+
+	if state and !king_square.has_node("CheckIndicator"):
+		var check_ind = $Assets/CheckIndicator.duplicate()
+		king_square.add_child(check_ind)
+		check_ind.position = Vector2.ZERO
+		check_ind.set_anchors_and_offsets_preset(PRESET_CENTER)
+		check_ind.visible = true
+		%CheckSound.play()
+
+func handle_checks():
+	var white_king = pieces["WhiteKing"]
+	var black_king = pieces["BlackKing"]
+
+	for piece in pieces.values():
+		if piece.is_white and black_king.position in get_valid_moves(piece):
+			return set_king_in_check(false, true)
+		if !piece.is_white and white_king.position in get_valid_moves(piece):
+			return set_king_in_check(true, true)
+
+	set_king_in_check(false, false)
+	set_king_in_check(true, false)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func move(piece_name, no: String, client_id: int):
 	if !global.is_multiplayer:
-		is_white = !is_white
+		is_player_white = !is_player_white
 	if client_id != multiplayer.get_unique_id():
 		no = no[0] + str(9 - int(no[1]))
 
@@ -185,6 +233,12 @@ func move(piece_name: String, no: String, client_id: int):
 	var source_square = get_square(piece.position)
 	var target_square = get_square(no)
 
+	source_square.remove_child(piece.node)
+	target_square.add_child(piece.node)
+	piece.node.position = Vector2.ZERO
+	piece.position = no
+	piece.moves += 1
+
 	if piece_on_sq:
 		piece_on_sq.node.queue_free()
 		pieces.erase(pieces.find_key(piece_on_sq))
@@ -192,11 +246,12 @@ func move(piece_name: String, no: String, client_id: int):
 	else:
 		%MoveSound.play()
 
-	source_square.remove_child(piece.node)
-	target_square.add_child(piece.node)
-	piece.node.position = Vector2.ZERO
-	piece.position = no
-	piece.moves += 1
+	if piece.type == PieceType.King and piece.in_check:
+		source_square.get_node("CheckIndicator").queue_free()
+
+	handle_checks()
+	is_turn = !is_turn
+
 
 func is_valid_notation(no: String):
 	if len(no) == 2 and no[0] in "abcdefgh" and no[1] in "12345678":
@@ -219,14 +274,6 @@ func get_no_from_norm_pos(pos: Vector2i):
 		return
 	var x = horizontal_squares[pos.x - 1]
 	return x + str(pos.y)
-
-func get_global_pos(no: String):
-	if !is_valid_notation(no):
-		return
-	var top_left = $"Squares/a/8".get_global_rect()
-	var offset_x = top_left.size.x * horizontal_squares.find(no[0])
-	var offset_y = top_left.size.y * 8 - top_left.size.y * int(no[1])
-	return top_left.position + Vector2(offset_x, offset_y)
 
 func get_piece_on_square(no: String):
 	for piece in pieces.values():

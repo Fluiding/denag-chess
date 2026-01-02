@@ -1,5 +1,0 @@
-[gd_resource type="StyleBoxFlat" format=3 uid="uid://bugamuekweuft"]
-
-[resource]
-bg_color = Color(0.5176471, 0.58431375, 0.39215687, 1)
-anti_aliasing = false
