@@ -1,9 +1,8 @@
-[gd_scene load_steps=91 format=3 uid="uid://p8wxtnk1k3r3"]
+[gd_scene load_steps=90 format=3 uid="uid://p8wxtnk1k3r3"]
 
 [ext_resource type="Texture2D" uid="uid://blxpsst2gmovq" path="res://assets/pfp_placeholder.png" id="1_161ya"]
 [ext_resource type="FontFile" uid="uid://v2myfakbs1qm" path="res://assets/Fredoka.ttf" id="2_a1b85"]
 [ext_resource type="Script" uid="uid://ji04tn1ylv8d" path="res://scripts/chess_board.gd" id="3_n2xhk"]
-[ext_resource type="Texture2D" uid="uid://cr0m6a63wrwcs" path="res://assets/check_indicator.png" id="4_u46lk"]
 [ext_resource type="Texture2D" uid="uid://cp4wbrehqpxqi" path="res://assets/pieces/br.png" id="6_ssxln"]
 [ext_resource type="Texture2D" uid="uid://c7ch3a08udehc" path="res://assets/pieces/bn.png" id="7_h1iof"]
 [ext_resource type="Texture2D" uid="uid://dljvfepgnrdl1" path="res://assets/pieces/bb.png" id="8_04w18"]
@@ -952,27 +951,6 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_od2rd")
 
 [node name="Assets" type="Node" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
-
-[node name="CheckIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]
-visible = false
-z_index = 1
-custom_minimum_size = Vector2(160, 160)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -540.0
-offset_top = -1170.0
-offset_right = -370.0
-offset_bottom = -1000.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-texture = ExtResource("4_u46lk")
-expand_mode = 1
 
 [node name="BlackQueen" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]
 visible = false
