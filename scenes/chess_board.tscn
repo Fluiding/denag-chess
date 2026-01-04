@@ -1,8 +1,10 @@
-[gd_scene load_steps=90 format=3 uid="uid://p8wxtnk1k3r3"]
+[gd_scene load_steps=93 format=3 uid="uid://p8wxtnk1k3r3"]
 
 [ext_resource type="Texture2D" uid="uid://blxpsst2gmovq" path="res://assets/pfp_placeholder.png" id="1_161ya"]
 [ext_resource type="FontFile" uid="uid://v2myfakbs1qm" path="res://assets/Fredoka.ttf" id="2_a1b85"]
 [ext_resource type="Script" uid="uid://ji04tn1ylv8d" path="res://scripts/chess_board.gd" id="3_n2xhk"]
+[ext_resource type="Texture2D" uid="uid://cr0m6a63wrwcs" path="res://assets/check_indicator.png" id="4_a1b85"]
+[ext_resource type="Texture2D" uid="uid://d4kcvs61egs31" path="res://assets/circle.svg" id="5_n2xhk"]
 [ext_resource type="Texture2D" uid="uid://cp4wbrehqpxqi" path="res://assets/pieces/br.png" id="6_ssxln"]
 [ext_resource type="Texture2D" uid="uid://c7ch3a08udehc" path="res://assets/pieces/bn.png" id="7_h1iof"]
 [ext_resource type="Texture2D" uid="uid://dljvfepgnrdl1" path="res://assets/pieces/bb.png" id="8_04w18"]
@@ -54,6 +56,8 @@ border_color = Color(0.19607843, 0.2, 0.2784314, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uxk4"]
 bg_color = Color(0.9254902, 0.92941177, 0.84313726, 1)
 anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_n2xhk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u46lk"]
 bg_color = Color(0.5176471, 0.58431375, 0.39215687, 1)
@@ -404,6 +408,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_0uxk4")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -411,6 +432,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_u46lk")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 z_index = 3
@@ -420,6 +458,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_161ya")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -427,6 +482,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_a1b85")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 z_index = 3
@@ -436,6 +508,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_n2xhk")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -443,6 +532,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ob2p")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 z_index = 3
@@ -452,6 +558,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jcfce")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -459,6 +582,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ssxln")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/a/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="b" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -474,6 +614,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_h1iof")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -481,6 +638,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_04w18")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 z_index = 3
@@ -490,6 +664,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ve3gr")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -497,6 +688,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_6jn3o")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 z_index = 3
@@ -506,6 +714,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_qqyo2")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -513,6 +738,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ldayc")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 z_index = 3
@@ -522,6 +764,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_grhso")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -529,6 +788,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_tfylg")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/b/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="c" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -544,6 +820,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_3iy8w")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -551,6 +844,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ta22p")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 z_index = 3
@@ -560,6 +870,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_2pwln")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -567,6 +894,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_2i8n2")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 z_index = 3
@@ -576,6 +920,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_mxex8")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -583,6 +944,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_5n7cw")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 z_index = 3
@@ -592,6 +970,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_b2kfd")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -599,6 +994,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_in3mp")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/c/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="d" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -614,6 +1026,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_vj3af")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -621,6 +1050,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_64gro")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 z_index = 3
@@ -630,6 +1076,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_2mybt")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -637,6 +1100,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jkjvw")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 z_index = 3
@@ -646,6 +1126,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ddyil")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -653,6 +1150,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bjhs3")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 z_index = 3
@@ -662,6 +1176,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ots1s")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -669,6 +1200,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_m0nhb")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/d/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="e" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -684,6 +1232,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_i1r88")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -691,6 +1256,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_nff7d")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 z_index = 3
@@ -700,6 +1282,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_75y13")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -707,6 +1306,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_v7wrt")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 z_index = 3
@@ -716,6 +1332,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_8h2pt")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -723,6 +1356,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_sy8ef")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 z_index = 3
@@ -732,6 +1382,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_iqtji")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -739,6 +1406,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_tmdwh")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/e/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="f" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -754,6 +1438,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_nb4us")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -761,6 +1462,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_66dfk")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 z_index = 3
@@ -770,6 +1488,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_a5vwh")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -777,6 +1512,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_27f1l")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 z_index = 3
@@ -786,6 +1538,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_aeosi")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -793,6 +1562,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_kd6er")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 z_index = 3
@@ -802,6 +1588,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_tknkb")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -809,6 +1612,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_1uet5")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/f/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="g" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -824,6 +1644,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_bpkp6")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -831,6 +1668,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ppou5")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 z_index = 3
@@ -840,6 +1694,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_4t52o")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -847,6 +1718,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ygffd")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 z_index = 3
@@ -856,6 +1744,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_qml0e")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -863,6 +1768,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_r8gnf")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 z_index = 3
@@ -872,6 +1794,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_13l7t")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -879,6 +1818,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_m6gcd")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/g/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="h" type="VBoxContainer" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares"]
 show_behind_parent = true
@@ -894,6 +1850,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_3lgpf")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/8"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="7" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -901,6 +1874,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_k4acn")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/7"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="6" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 z_index = 3
@@ -910,6 +1900,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_8twtp")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/6"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="5" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -917,6 +1924,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_kvdoc")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/5"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="4" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 z_index = 3
@@ -926,6 +1950,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_v5asj")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/4"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="3" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -933,6 +1974,23 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_is3ne")
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/3"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
 
 [node name="2" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 z_index = 3
@@ -942,6 +2000,23 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_i4573")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/2"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="1" type="Panel" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h"]
 z_index = 3
 custom_minimum_size = Vector2(117, 117)
@@ -950,7 +2025,67 @@ size_flags_horizontal = 5
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_od2rd")
 
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Squares/h/1"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
 [node name="Assets" type="Node" parent="MarginContainer/BG/VBoxContainer/ChessBoard"]
+
+[node name="MoveIndicator" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]
+visible = false
+modulate = Color(1, 1, 1, 0.21568628)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_n2xhk")
+texture = ExtResource("5_n2xhk")
+expand_mode = 1
+
+[node name="BlackKing" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]
+visible = false
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_6jn3o")
+expand_mode = 1
+
+[node name="CheckIndicator" type="NinePatchRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]
+visible = false
+z_index = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_a1b85")
+region_rect = Rect2(99, 99, 633, 633)
 
 [node name="BlackQueen" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]
 visible = false
@@ -1006,20 +2141,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("8_04w18")
-expand_mode = 1
-
-[node name="BlackKing" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]
-visible = false
-z_index = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-texture = ExtResource("10_6jn3o")
 expand_mode = 1
 
 [node name="BlackBishop2" type="TextureRect" parent="MarginContainer/BG/VBoxContainer/ChessBoard/Assets"]

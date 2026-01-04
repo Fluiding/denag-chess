@@ -11,6 +11,7 @@ const default_board = [
 	["WhiteRook1", "WhiteKnight1", "WhiteBishop1", "WhiteQueen", "WhiteKing", "WhiteBishop2", "WhiteKnight2", "WhiteRook2"],
 ]
 
+## The normalized directions pieces can move in.
 const piece_directions = {
 	rook = [
 		Vector2i(1, 0), Vector2i(0, 1),
@@ -30,17 +31,19 @@ const piece_directions = {
 
 enum PieceType {Rook, Knight, Bishop, Queen, King, Pawn}
 const horizontal_squares = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-var mouse_on_square
+var mouse_on_square: String
 var holding_piece: Piece
+var selected_piece: Piece
+var move_indicators = []
 var pieces = {}
 var regex = RegEx.new()
-var is_player_white: bool
 var is_turn = false
+var is_white_turn = true
 
 class Piece:
 	var type: PieceType
 	var is_white: bool
-	var in_check: bool = false # Only for the king pieces
+	var in_check: bool = false ## Only for the king pieces
 	var position: String
 	var moves: int = 0
 	var node: Node
@@ -63,55 +66,75 @@ func _ready():
 func _process(_delta: float):
 
 	if Input.is_action_just_pressed("click") and mouse_on_square:
+		if mouse_on_square in move_indicators:
+			handle_set_piece()
+		clear_move_indicators()
+
 		var piece = get_piece_on_square(mouse_on_square)
-		if piece and piece.is_white == is_player_white:
+		if piece and !global.is_multiplayer or (global.is_multiplayer and is_turn):
+			selected_piece = piece
 			holding_piece = piece
 			piece.node.z_index += 1
+
+			var valid_moves = get_valid_moves(piece)
+			for move in valid_moves:
+				var square = get_square(move)
+				square.get_child(0).visible = true
+				move_indicators.append(move)
 
 	if holding_piece:
 		var mouse_pos = get_global_mouse_position()
 		var target_piece_pos = mouse_pos - holding_piece.node.size / 2
 		holding_piece.node.global_position = target_piece_pos
+
 		if holding_piece.in_check:
 			var check_ind = holding_piece.node.get_parent()
 			check_ind = check_ind.get_node("CheckIndicator")
 			var target_ind_pos = mouse_pos - check_ind.size / 2
 			check_ind.global_position = target_ind_pos
 
-
-
 	if Input.is_action_just_released("click") and mouse_on_square and holding_piece:
+		handle_set_piece()
 
-		if (is_turn or !global.is_multiplayer) \
-		and mouse_on_square in get_valid_moves(holding_piece):
-			var client_id = multiplayer.get_unique_id()
-			move.rpc(holding_piece.node.name, mouse_on_square, client_id)
-		else:
-			holding_piece.node.position = Vector2.ZERO
-			if holding_piece.in_check:
-				var check_ind = holding_piece.node.get_parent()
-				check_ind = check_ind.get_node("CheckIndicator")
-				check_ind.position = Vector2.ZERO
-				check_ind.set_anchors_and_offsets_preset(PRESET_CENTER)
+func handle_set_piece():
+	selected_piece.node.z_index -= 1
+	holding_piece = null
 
-		holding_piece.node.z_index -= 1
-		holding_piece = null
+	if (is_turn or !global.is_multiplayer) and mouse_on_square in get_valid_moves(selected_piece):
+		# Move piece
+		var client_id = multiplayer.get_unique_id()
+		move_piece.rpc(selected_piece.node.name, mouse_on_square, client_id)
+		selected_piece = null
+		clear_move_indicators()
+		return
 
+	# Put piece and check indicator back
+	selected_piece.node.position = Vector2.ZERO
+	if selected_piece.in_check:
+		var check_ind = selected_piece.node.get_parent()
+		check_ind = check_ind.get_node("CheckIndicator")
+		check_ind.position = Vector2.ZERO
+
+
+func clear_move_indicators():
+	for move_ind in move_indicators:
+		get_square(move_ind).get_child(0).visible = false
+	move_indicators.clear()
 
 func init_chess_board(is_white: bool):
 	%GameBeginSound.play()
-	is_player_white = is_white
 	is_turn = !global.is_multiplayer or is_white
+	is_white_turn = is_turn
 
 	var board = default_board.duplicate(true)
-	if !is_white:
+	if !is_white_turn:
 		board.reverse()
 
 	for y_index in range(8):
 		for x_index in range(8):
 			var no = horizontal_squares[x_index] + str(8 - y_index)
 			var piece_name = board[y_index][x_index]
-			if not piece_name:
+			if !piece_name:
 				continue
 
 			var data = regex.search_all(piece_name)
@@ -122,7 +145,8 @@ func init_chess_board(is_white: bool):
 			var piece_obj = Piece.new(self, PieceType[type], white, piece_node.name, no)
 			pieces.set(piece_node.name, piece_obj)
 
-# Cast a ray from the piece to detect if squares are valid moves.
+
+## Cast a ray from the piece to detect if squares are valid moves.
 func raycast(piece, dir: Vector2i, steps = 32, include_capture = true, captures_only = false):
 	var valid_moves = []
 	var step = 0
@@ -146,7 +170,9 @@ func raycast(piece, dir: Vector2i, steps = 32, include_capture = true, captures_
 	return valid_moves
 
 
-func get_valid_moves(piece):
+func get_valid_moves(piece, exclude_check = false):
+	if piece.position == "" or piece.is_white != is_white_turn:
+		return []
 	var valid_moves = []
 
 	match piece.type:
@@ -176,7 +202,7 @@ func get_valid_moves(piece):
 			if global.is_multiplayer:
 				dir = Vector2i(0, 1)
 			else:
-				dir = Vector2i(0, 1 if is_turn else -1)
+				dir = Vector2i(0, 1 if is_white_turn else -1)
 			var steps = int(piece.moves == 0) + 1
 
 			# Diagonal Captures
@@ -186,6 +212,29 @@ func get_valid_moves(piece):
 			valid_moves.append_array(raycast(piece, dir, steps, false))
 			valid_moves.append_array(raycast(piece, d1, 1, true, true))
 			valid_moves.append_array(raycast(piece, d2, 1, true, true))
+
+	if !exclude_check:
+		var buffer = valid_moves.duplicate()
+
+		for move in valid_moves:
+			var piece_on_sq = get_piece_on_square(move)
+			var old_position = piece.position
+			var old_captured_position
+
+			piece.position = move
+			if piece_on_sq:
+				old_captured_position = piece_on_sq.position
+				piece_on_sq.position = ""
+
+			var check_states = get_check_states()
+			if check_states[int(piece.is_white)]:
+				buffer.erase(move)
+
+			piece.position = old_position
+			if piece_on_sq:
+				piece_on_sq.position = old_captured_position
+
+		valid_moves = buffer
 
 	return valid_moves
 
@@ -203,28 +252,29 @@ func set_king_in_check(is_king_white, state):
 		var check_ind = $Assets/CheckIndicator.duplicate()
 		king_square.add_child(check_ind)
 		check_ind.position = Vector2.ZERO
-		check_ind.set_anchors_and_offsets_preset(PRESET_CENTER)
 		check_ind.visible = true
 		%CheckSound.play()
 
-func handle_checks():
+## Returns if black and/or white kings are in check.
+func get_check_states() -> Array[bool]:
 	var white_king = pieces["WhiteKing"]
 	var black_king = pieces["BlackKing"]
+	var black_in_check = false
+	var white_in_check = false
 
 	for piece in pieces.values():
-		if piece.is_white and black_king.position in get_valid_moves(piece):
-			return set_king_in_check(false, true)
-		if !piece.is_white and white_king.position in get_valid_moves(piece):
-			return set_king_in_check(true, true)
+		if !black_in_check and piece.is_white and black_king.position in get_valid_moves(piece, true):
+			black_in_check = true
+		if !white_in_check and !piece.is_white and white_king.position in get_valid_moves(piece, true):
+			white_in_check = true
 
-	set_king_in_check(false, false)
-	set_king_in_check(true, false)
+	return [black_in_check, white_in_check]
 
+func is_checkmate():
+	pass
 
 @rpc("any_peer", "call_local", "reliable")
-func move(piece_name, no: String, client_id: int):
-	if !global.is_multiplayer:
-		is_player_white = !is_player_white
+func move_piece(piece_name, no: String, client_id: int):
 	if client_id != multiplayer.get_unique_id():
 		no = no[0] + str(9 - int(no[1]))
 
@@ -249,8 +299,11 @@ func move(piece_name, no: String, client_id: int):
 	if piece.type == PieceType.King and piece.in_check:
 		source_square.get_node("CheckIndicator").queue_free()
 
-	handle_checks()
-	is_turn = !is_turn
+	var check_states = get_check_states()
+	set_king_in_check(false, check_states[0])
+	set_king_in_check(true, check_states[1])
+	is_turn = !is_turn or !global.is_multiplayer
+	is_white_turn = !is_white_turn
 
 
 func is_valid_notation(no: String):
@@ -285,4 +338,4 @@ func on_square_mouse_entered(square_node, __):
 	mouse_on_square = square_node.get_parent().name + square_node.name
 
 func on_square_mouse_exited() -> void:
-	mouse_on_square = null
+	mouse_on_square = ""

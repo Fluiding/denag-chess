@@ -154,7 +154,7 @@ corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
 
-[node name="MainMenu" type="Control"]
+[node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,31 +165,36 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 script = ExtResource("1_bqqt6")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="MarginContainer"]
-layout_mode = 2
 color = Color(0.37254903, 0.49411765, 0.42352942, 1)
 
-[node name="MainMenu" type="VBoxContainer" parent="MarginContainer/Background"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(950, 0)
+[node name="Content" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.32890624
-anchor_top = 0.1
-anchor_right = 0.67109376
-anchor_bottom = 0.9
+anchor_left = 0.03
+anchor_top = 0.09
+anchor_right = 0.97
+anchor_bottom = 0.91
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Background/MainMenu"]
+[node name="MainMenu" type="VBoxContainer" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(950, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="Content/MainMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "DENAG CHESS"
@@ -197,18 +202,11 @@ label_settings = SubResource("LabelSettings_qe12f")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Content/MainMenu"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_top = 180
+theme_override_constants/margin_top = 200
 
-[node name="MainMenuContents" type="VBoxContainer" parent="MarginContainer/Background/MainMenu/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 32
-
-[node name="MultiplayerButton" type="Button" parent="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents"]
+[node name="MultiplayerButton" type="Button" parent="Content/MainMenu"]
 custom_minimum_size = Vector2(900, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -228,7 +226,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_7vrkn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fu7sn")
 text = "MULTIPLAYER"
 
-[node name="SingleplayerButton" type="Button" parent="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents"]
+[node name="SingleplayerButton" type="Button" parent="Content/MainMenu"]
 custom_minimum_size = Vector2(500, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -248,7 +246,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_7vrkn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fu7sn")
 text = "SINGLEPLAYER"
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents"]
+[node name="SettingsButton" type="Button" parent="Content/MainMenu"]
 custom_minimum_size = Vector2(500, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -268,7 +266,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_7vrkn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fu7sn")
 text = "SETTINGS"
 
-[node name="ExitButton" type="Button" parent="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents"]
+[node name="ExitButton" type="Button" parent="Content/MainMenu"]
 custom_minimum_size = Vector2(500, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -288,21 +286,19 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_7vrkn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fu7sn")
 text = "QUIT"
 
-[node name="MultiplayerMenu" type="VBoxContainer" parent="MarginContainer/Background"]
+[node name="MultiplayerMenu" type="VBoxContainer" parent="Content"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(950, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.32890624
-anchor_top = 0.1
-anchor_right = 0.67109376
-anchor_bottom = 0.9
+layout_mode = 0
+offset_top = 200.0
+offset_right = 1080.0
+offset_bottom = 2340.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="MarginContainer/Background/MultiplayerMenu"]
+[node name="Label" type="Label" parent="Content/MultiplayerMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "MULTIPLAYER"
@@ -310,17 +306,17 @@ label_settings = SubResource("LabelSettings_7vrkn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/MultiplayerMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Content/MultiplayerMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 180
 
-[node name="MultiplayerMenuContents" type="VBoxContainer" parent="MarginContainer/Background/MultiplayerMenu/MarginContainer"]
+[node name="MultiplayerMenuContents" type="VBoxContainer" parent="Content/MultiplayerMenu/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="HostButton" type="Button" parent="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents"]
+[node name="HostButton" type="Button" parent="Content/MultiplayerMenu/MarginContainer/MultiplayerMenuContents"]
 custom_minimum_size = Vector2(900, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -340,7 +336,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "HOST"
 
-[node name="JoinButton" type="Button" parent="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents"]
+[node name="JoinButton" type="Button" parent="Content/MultiplayerMenu/MarginContainer/MultiplayerMenuContents"]
 custom_minimum_size = Vector2(500, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -360,7 +356,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "JOIN"
 
-[node name="BackButton" type="Button" parent="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents"]
+[node name="BackButton" type="Button" parent="Content/MultiplayerMenu/MarginContainer/MultiplayerMenuContents"]
 custom_minimum_size = Vector2(500, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -380,21 +376,24 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "BACK"
 
-[node name="HostingMenu" type="VBoxContainer" parent="MarginContainer/Background"]
+[node name="HostingMenu" type="VBoxContainer" parent="Content"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(950, 0)
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.32890624
 anchor_top = 0.1
 anchor_right = 0.67109376
 anchor_bottom = 0.9
+offset_left = -290.21875
+offset_top = -140.0
+offset_right = 290.21875
+offset_bottom = 278.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="MarginContainer/Background/HostingMenu"]
+[node name="Label" type="Label" parent="Content/HostingMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "HOSTING GAME"
@@ -402,18 +401,18 @@ label_settings = SubResource("LabelSettings_7vrkn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/HostingMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Content/HostingMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 180
 
-[node name="HostingMenuContents" type="VBoxContainer" parent="MarginContainer/Background/HostingMenu/MarginContainer"]
+[node name="HostingMenuContents" type="VBoxContainer" parent="Content/HostingMenu/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/Background/HostingMenu/MarginContainer/HostingMenuContents"]
+[node name="StatusLabel" type="Label" parent="Content/HostingMenu/MarginContainer/HostingMenuContents"]
 layout_mode = 2
 size_flags_horizontal = 5
 text = "Loading..."
@@ -421,7 +420,7 @@ label_settings = SubResource("LabelSettings_glbon")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CancelButton" type="Button" parent="MarginContainer/Background/HostingMenu/MarginContainer/HostingMenuContents"]
+[node name="CancelButton" type="Button" parent="Content/HostingMenu/MarginContainer/HostingMenuContents"]
 custom_minimum_size = Vector2(900, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -441,23 +440,24 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "CANCEL"
 
-[node name="JoinMenu" type="VBoxContainer" parent="MarginContainer/Background"]
+[node name="JoinMenu" type="VBoxContainer" parent="Content"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(950, 0)
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.32890624
 anchor_top = 0.1
 anchor_right = 0.67109376
 anchor_bottom = 0.9
-offset_left = -265.21875
-offset_right = 265.21875
+offset_left = -290.21875
+offset_top = -140.0
+offset_right = 290.21875
+offset_bottom = 519.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="MarginContainer/Background/JoinMenu"]
+[node name="Label" type="Label" parent="Content/JoinMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "JOIN GAME"
@@ -465,18 +465,18 @@ label_settings = SubResource("LabelSettings_7vrkn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/JoinMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Content/JoinMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 180
 
-[node name="JoinMenuContents" type="VBoxContainer" parent="MarginContainer/Background/JoinMenu/MarginContainer"]
+[node name="JoinMenuContents" type="VBoxContainer" parent="Content/JoinMenu/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="AddressInput" type="LineEdit" parent="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents"]
+[node name="AddressInput" type="LineEdit" parent="Content/JoinMenu/MarginContainer/JoinMenuContents"]
 custom_minimum_size = Vector2(500, 140)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -487,7 +487,7 @@ theme_override_styles/read_only = SubResource("StyleBoxEmpty_jix8l")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_glbon")
 placeholder_text = "Enter IP Address Here..."
 
-[node name="JoinButton" type="Button" parent="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents"]
+[node name="JoinButton" type="Button" parent="Content/JoinMenu/MarginContainer/JoinMenuContents"]
 custom_minimum_size = Vector2(900, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -507,7 +507,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "JOIN"
 
-[node name="BackButton" type="Button" parent="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents"]
+[node name="BackButton" type="Button" parent="Content/JoinMenu/MarginContainer/JoinMenuContents"]
 custom_minimum_size = Vector2(500, 140)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -527,21 +527,24 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "BACK"
 
-[node name="JoiningMenu" type="VBoxContainer" parent="MarginContainer/Background"]
+[node name="JoiningMenu" type="VBoxContainer" parent="Content"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(950, 0)
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.32890624
 anchor_top = 0.1
 anchor_right = 0.67109376
 anchor_bottom = 0.9
+offset_left = -290.21875
+offset_top = -140.0
+offset_right = 290.21875
+offset_bottom = 278.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="MarginContainer/Background/JoiningMenu"]
+[node name="Label" type="Label" parent="Content/JoiningMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "JOINING GAME"
@@ -549,18 +552,18 @@ label_settings = SubResource("LabelSettings_7vrkn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/JoiningMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Content/JoiningMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_top = 180
 
-[node name="JoiningMenuContents" type="VBoxContainer" parent="MarginContainer/Background/JoiningMenu/MarginContainer"]
+[node name="JoiningMenuContents" type="VBoxContainer" parent="Content/JoiningMenu/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 32
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents"]
+[node name="StatusLabel" type="Label" parent="Content/JoiningMenu/MarginContainer/JoiningMenuContents"]
 layout_mode = 2
 size_flags_horizontal = 5
 text = "Loading..."
@@ -568,7 +571,7 @@ label_settings = SubResource("LabelSettings_glbon")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CancelButton" type="Button" parent="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents"]
+[node name="CancelButton" type="Button" parent="Content/JoiningMenu/MarginContainer/JoiningMenuContents"]
 custom_minimum_size = Vector2(900, 145)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -588,17 +591,25 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dy7ct")
 text = "CANCEL"
 
-[connection signal="pressed" from="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents/MultiplayerButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents/SingleplayerButton" to="." method="singleplayer"]
-[connection signal="pressed" from="MarginContainer/Background/MainMenu/MarginContainer/MainMenuContents/ExitButton" to="." method="on_exit_pressed"]
-[connection signal="pressed" from="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/HostButton" to="." method="host"]
-[connection signal="pressed" from="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/HostButton" to="." method="switch_menu" binds= [NodePath("../../../../HostingMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/JoinButton" to="." method="switch_menu" binds= [NodePath("../../../../JoinMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/BackButton" to="." method="switch_menu" binds= [NodePath("../../../../MainMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/HostingMenu/MarginContainer/HostingMenuContents/CancelButton" to="." method="cancel_connection"]
-[connection signal="pressed" from="MarginContainer/Background/HostingMenu/MarginContainer/HostingMenuContents/CancelButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents/JoinButton" to="." method="join"]
-[connection signal="pressed" from="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents/JoinButton" to="." method="switch_menu" binds= [NodePath("../../../../JoiningMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/JoinMenu/MarginContainer/JoinMenuContents/BackButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
-[connection signal="pressed" from="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="cancel_connection"]
-[connection signal="pressed" from="MarginContainer/Background/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
+[node name="NinePatchRect" type="NinePatchRect" parent="Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Content/MainMenu/MultiplayerButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
+[connection signal="pressed" from="Content/MainMenu/SingleplayerButton" to="." method="singleplayer"]
+[connection signal="pressed" from="Content/MainMenu/ExitButton" to="." method="on_exit_pressed"]
+[connection signal="pressed" from="Content/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/HostButton" to="." method="host"]
+[connection signal="pressed" from="Content/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/HostButton" to="." method="switch_menu" binds= [NodePath("../../../../HostingMenu")]]
+[connection signal="pressed" from="Content/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/JoinButton" to="." method="switch_menu" binds= [NodePath("../../../../JoinMenu")]]
+[connection signal="pressed" from="Content/MultiplayerMenu/MarginContainer/MultiplayerMenuContents/BackButton" to="." method="switch_menu" binds= [NodePath("../../../../MainMenu")]]
+[connection signal="pressed" from="Content/HostingMenu/MarginContainer/HostingMenuContents/CancelButton" to="." method="cancel_connection"]
+[connection signal="pressed" from="Content/HostingMenu/MarginContainer/HostingMenuContents/CancelButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
+[connection signal="pressed" from="Content/JoinMenu/MarginContainer/JoinMenuContents/JoinButton" to="." method="join"]
+[connection signal="pressed" from="Content/JoinMenu/MarginContainer/JoinMenuContents/JoinButton" to="." method="switch_menu" binds= [NodePath("../../../../JoiningMenu")]]
+[connection signal="pressed" from="Content/JoinMenu/MarginContainer/JoinMenuContents/BackButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
+[connection signal="pressed" from="Content/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="cancel_connection"]
+[connection signal="pressed" from="Content/JoiningMenu/MarginContainer/JoiningMenuContents/CancelButton" to="." method="switch_menu" binds= [NodePath("../../../../MultiplayerMenu")]]
