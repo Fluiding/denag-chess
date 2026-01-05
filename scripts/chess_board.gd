@@ -39,6 +39,8 @@ var pieces = {}
 var regex = RegEx.new()
 var is_turn = false
 var is_white_turn = true
+var touchscreen = false
+var hold_debounce = false
 
 class Piece:
 	var type: PieceType
@@ -63,24 +65,34 @@ func _ready():
 	regex.compile("[A-Z][a-z]*")
 	init_chess_board(global.is_white)
 
+func _input(event: InputEvent):
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		touchscreen = true
+	elif event is InputEventMouse:
+		touchscreen = false
+
 func _process(_delta: float):
 
 	if Input.is_action_just_pressed("click") and mouse_on_square:
-		if mouse_on_square in move_indicators:
+
+		if mouse_on_square in move_indicators and !touchscreen:
 			handle_move_piece()
-		clear_move_indicators()
+			clear_move_indicators()
+		else:
+			clear_move_indicators()
+			var piece = get_piece_on_square(mouse_on_square)
+			if piece and !global.is_multiplayer or (global.is_multiplayer and is_turn):
 
-		var piece = get_piece_on_square(mouse_on_square)
-		if piece and !global.is_multiplayer or (global.is_multiplayer and is_turn):
-			selected_piece = piece
-			holding_piece = piece
-			piece.node.z_index += 1
+				selected_piece = piece
+				holding_piece = piece
+				piece.node.z_index += 1
 
-			var valid_moves = get_valid_moves(piece)
-			for move in valid_moves:
-				var square = get_square(move)
-				square.get_child(0).visible = true
-				move_indicators.append(move)
+				var valid_moves = get_valid_moves(piece)
+				for move in valid_moves:
+					var square = get_square(move)
+					square.get_child(0).visible = true
+					move_indicators.append(move)
+
 
 	if holding_piece:
 		var mouse_pos = get_global_mouse_position()
@@ -93,8 +105,9 @@ func _process(_delta: float):
 			var target_ind_pos = mouse_pos - check_ind.size / 2
 			check_ind.global_position = target_ind_pos
 
-	if Input.is_action_just_released("click") and mouse_on_square and holding_piece:
-		handle_move_piece()
+	if Input.is_action_just_released("click") and mouse_on_square:
+		if holding_piece or (mouse_on_square in move_indicators and touchscreen):
+			handle_move_piece()
 
 func handle_move_piece():
 	var moved = false
@@ -171,7 +184,7 @@ func raycast(piece, dir: Vector2i, steps = 32, include_capture = true, captures_
 
 
 func get_valid_moves(piece, exclude_check = false):
-	if piece.position == "" or piece.is_white != is_white_turn:
+	if piece.position == "" or (piece.is_white != is_white_turn and !exclude_check):
 		return []
 	var valid_moves = []
 
