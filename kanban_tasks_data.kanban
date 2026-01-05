@@ -10,7 +10,9 @@
 		{
 			"uuid": "de7e7673-4996-4a13-9c5c-29d588d3bbf2",
 			"title": "Todo",
-			"tasks": []
+			"tasks": [
+				"ab6bc0a2-f329-431e-becc-c3c7be0c5c47"
+			]
 		},
 		{
 			"uuid": "2a33959e-bda1-4c53-a750-d9af083371af",
@@ -23,7 +25,15 @@
 			"tasks": []
 		}
 	],
-	"tasks": [],
+	"tasks": [
+		{
+			"uuid": "ab6bc0a2-f329-431e-becc-c3c7be0c5c47",
+			"title": "a yellow tint on the source and target square of the last move",
+			"description": "",
+			"category": "3d32c0e0-f22a-4a1a-9725-28151a8930aa",
+			"steps": []
+		}
+	],
 	"layout": {
 		"columns": [
 			[

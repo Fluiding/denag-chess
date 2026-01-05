@@ -276,10 +276,9 @@ func get_check_states() -> Array[bool]:
 	var white_in_check = false
 
 	for piece in pieces.values():
-		if !black_in_check and piece.is_white and black_king.position in get_valid_moves(piece, true):
-			black_in_check = true
-		if !white_in_check and !piece.is_white and white_king.position in get_valid_moves(piece, true):
-			white_in_check = true
+		var valid_moves = get_valid_moves(piece, true)
+		black_in_check = black_in_check or black_king.position in valid_moves
+		white_in_check = white_in_check or white_king.position in valid_moves
 
 	return [black_in_check, white_in_check]
 
