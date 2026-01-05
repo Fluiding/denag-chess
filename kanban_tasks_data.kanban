@@ -11,13 +11,18 @@
 			"uuid": "de7e7673-4996-4a13-9c5c-29d588d3bbf2",
 			"title": "Todo",
 			"tasks": [
-				"ab6bc0a2-f329-431e-becc-c3c7be0c5c47"
+				"ab6bc0a2-f329-431e-becc-c3c7be0c5c47",
+				"5683fbee-5b00-4b18-818c-2c561959030c",
+				"172cd168-a182-485c-a66f-5741f9de6dcf"
 			]
 		},
 		{
 			"uuid": "2a33959e-bda1-4c53-a750-d9af083371af",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"b91b009a-018e-4df9-891f-3e4d28b3ff9c",
+				"c972920e-0f96-49ba-a051-b3aeae841857"
+			]
 		},
 		{
 			"uuid": "62975ff5-79df-48cc-bc26-dd92ad1ee19f",
@@ -29,6 +34,34 @@
 		{
 			"uuid": "ab6bc0a2-f329-431e-becc-c3c7be0c5c47",
 			"title": "a yellow tint on the source and target square of the last move",
+			"description": "",
+			"category": "3d32c0e0-f22a-4a1a-9725-28151a8930aa",
+			"steps": []
+		},
+		{
+			"uuid": "5683fbee-5b00-4b18-818c-2c561959030c",
+			"title": "implement WAN",
+			"description": "",
+			"category": "3d32c0e0-f22a-4a1a-9725-28151a8930aa",
+			"steps": []
+		},
+		{
+			"uuid": "172cd168-a182-485c-a66f-5741f9de6dcf",
+			"title": "correctly scale chess board",
+			"description": "",
+			"category": "3d32c0e0-f22a-4a1a-9725-28151a8930aa",
+			"steps": []
+		},
+		{
+			"uuid": "b91b009a-018e-4df9-891f-3e4d28b3ff9c",
+			"title": "corrrectly scale menus",
+			"description": "",
+			"category": "3d32c0e0-f22a-4a1a-9725-28151a8930aa",
+			"steps": []
+		},
+		{
+			"uuid": "c972920e-0f96-49ba-a051-b3aeae841857",
+			"title": "fix menus",
 			"description": "",
 			"category": "3d32c0e0-f22a-4a1a-9725-28151a8930aa",
 			"steps": []
