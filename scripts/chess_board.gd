@@ -67,7 +67,7 @@ func _process(_delta: float):
 
 	if Input.is_action_just_pressed("click") and mouse_on_square:
 		if mouse_on_square in move_indicators:
-			handle_set_piece()
+			handle_move_piece()
 		clear_move_indicators()
 
 		var piece = get_piece_on_square(mouse_on_square)
@@ -94,26 +94,26 @@ func _process(_delta: float):
 			check_ind.global_position = target_ind_pos
 
 	if Input.is_action_just_released("click") and mouse_on_square and holding_piece:
-		handle_set_piece()
+		handle_move_piece()
 
-func handle_set_piece():
-	selected_piece.node.z_index -= 1
-	holding_piece = null
-
+func handle_move_piece():
+	var moved = false
 	if (is_turn or !global.is_multiplayer) and mouse_on_square in get_valid_moves(selected_piece):
-		# Move piece
+		moved = true
+
 		var client_id = multiplayer.get_unique_id()
 		move_piece.rpc(selected_piece.node.name, mouse_on_square, client_id)
-		selected_piece = null
 		clear_move_indicators()
-		return
 
-	# Put piece and check indicator back
 	selected_piece.node.position = Vector2.ZERO
 	if selected_piece.in_check:
 		var check_ind = selected_piece.node.get_parent()
 		check_ind = check_ind.get_node("CheckIndicator")
 		check_ind.position = Vector2.ZERO
+
+	selected_piece.node.z_index -= 1
+	selected_piece = null if moved else selected_piece
+	holding_piece = null
 
 
 func clear_move_indicators():
